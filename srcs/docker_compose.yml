@@ -1,0 +1,64 @@
+version: '3.9'
+
+# Mandatory part
+services:
+    nginx:
+         # Setting name to avoid default naming scheme (projectname_servicename)
+        container_name: nginx
+        # Image to use. Will be made from a dockerfile specified in build
+        image:          nginx:inception
+        build:          ./requirements/nginx/
+        networks:       inception
+        ports:          443:443
+        volumes:        - wordpress_data: # Path on host to wordpress directory
+        env_file:       .env
+        depends_on:     wordpress
+        restart:        on_failure
+    wordpress:
+        container_name: wordpress
+        image:          wordpress:inception
+        build:          ./requirements/wordpress/
+        networks:       inception
+        volumes:        - wordpress_data: # Path on host to wordpress directory
+        env_file:       .env
+        depends_on:     mariadb
+        restart:        on_failure
+    mariadb:
+        container_name: mariadb
+        image:          mariadb:inception
+        build:          ./requirements/mariadb/
+        networks:       inception
+        volumes:        - mariadb_data: # Path on host to mariadb directory
+        env_file:       .env
+        restart:        on_failure
+networks:
+    inception:
+        # Setting name to avoid default naming scheme (projectname_networkname)
+        name: inception
+        # Redundant since bridge is default. Included for clarity.
+        # Creates private network on the host and each connected container is
+        # assigned an IP address.
+        driver: bridge
+
+# Volumes are used by constainers to read and store data. The data is not
+# deleted when containers are removed and can be reused (e.g. restart).
+volumes:
+    wordpress_data:
+        # Local driver is default. Included for clarity.
+        # Local means the volume is stored on the host.
+        driver: local
+        # Specify driver options.
+        driver_opts:
+            type: none
+            # Binds mount maps a file/directory to a container.
+            # Changes made in the container are visible on the host and vice versa.
+            o: bind
+            device: # Path on host to wordpress directory
+    mariadb_data:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: # Path on host to mariadb directory
+
+# Bonus
