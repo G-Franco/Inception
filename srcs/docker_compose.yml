@@ -9,7 +9,7 @@ services:
         image:          nginx:inception
         build:          ./requirements/nginx/
         networks:       inception
-        ports:          443:443
+        ports:          "443:443"
         volumes:        - wordpress_data: # Path on host to wordpress directory
         env_file:       .env
         depends_on:     wordpress
