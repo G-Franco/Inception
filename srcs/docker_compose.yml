@@ -6,6 +6,7 @@ services:
          # Setting name to avoid default naming scheme (projectname_servicename)
         container_name: nginx
         # Image to use. Will be made from a dockerfile specified in build
+        # !!!!!!!!!!!!!!!!! Unnecessary because it will be built from a dockerfile?
         image:          nginx:inception
         build:          ./requirements/nginx/
         networks:       inception
@@ -16,6 +17,7 @@ services:
         restart:        on_failure
     wordpress:
         container_name: wordpress
+        # !!!!!!!!!!!!!!!!! Unnecessary because it will be built from a dockerfile?
         image:          wordpress:inception
         build:          ./requirements/wordpress/
         networks:       inception
@@ -25,6 +27,7 @@ services:
         restart:        on_failure
     mariadb:
         container_name: mariadb
+        # !!!!!!!!!!!!!!!!! Unnecessary because it will be built from a dockerfile?
         image:          mariadb:inception
         build:          ./requirements/mariadb/
         networks:       inception
@@ -51,7 +54,7 @@ volumes:
         driver_opts:
             type: none
             # Binds mount maps a file/directory to a container.
-            # Changes made in the container are visible on the host and vice versa.
+            # Changes in the container are visible on the host and vice versa.
             o: bind
             device: # Path on host to wordpress directory
     mariadb_data:
