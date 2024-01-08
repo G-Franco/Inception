@@ -1,4 +1,3 @@
-#Use the penultime version of nginx
 FROM	debian:bullseye
 
 #Update and upgrade the system
