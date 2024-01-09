@@ -5,7 +5,7 @@ FROM debian:bullseye
 RUN apt-get update && apt-get upgrade -y && \
 	echo "Update and upgrade done" && \
 # Installation
-# No nned to specify server, it's included in mariadb
+# No need to specify server, it's included in mariadb
 # Client is installed to have access to mysql command line
 	 apt-get install -y mariadb mariadb-client
 

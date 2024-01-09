@@ -3,7 +3,7 @@ FROM debian:bullseye
 # Update and upgrade
 RUN apt-get update && apt-get upgrade -y && \
 # Install wordpress dependencies
-	 apt-get install -y \
+	apt-get install -y \
 	php8.3 php8.3-fpm php8.3-mysql php8.3-curl php8.3-gd php8.3-intl php-pear \
 	php-imagick php8.3-imap php8.3-memcache php8.3-pspell php8.3-recode \
 	php8.3-sqlite3 php8.3-tidy php8.3-xmlrpc php8.3-xsl php8.3-mbstring \
