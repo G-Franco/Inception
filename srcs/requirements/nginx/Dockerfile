@@ -1,16 +1,16 @@
 FROM	debian:bullseye
 
-#Update and upgrade the system
-#-y to auto accept prompts, otherwise it will wait for user input
-RUN		apt-get update && apt-get upgrade -y
-RUN		echo "Update and upgrade done"
-
+# Update and upgrade the system
+# -y to auto accept prompts, otherwise it will wait for user input
+# && \ to run multiple commands in a single RUN instruction
+# to avoid creating multiple layers (which would increase the size of the image)
+RUN		apt-get update && apt-get upgrade -y && \
+		echo "Update and upgrade done" && \
 #Install NGINX and TLS
-RUN		apt-get install -y nginx openssl
-RUN		echo "NGINX and TLS installed"
-
+		apt-get install -y nginx openssl && \
+		echo "NGINX and TLS installed" && \
 #Create and process certificate
-RUN		openssl req \
+		openssl req \
 		#Create a self-signed certificate instead of a certificate request
 		-x509 \
 		#Don't encrypt the output key, write in plain text
@@ -25,8 +25,8 @@ RUN		openssl req \
 		-out /etc/ssl/certs/nginx-selfsigned.crt \
 		#Set certificate's subject name
 		#C=Country, ST=State, L=Locality, O=Organization, OU=Organizational Unit, CN=Common Name
-		-subj '/C=FR/ST=Ile-de-France/L=Paris/O=42/OU=42Paris/CN=INCEPTION'
-RUN		echo "Certificate created"
+		-subj '/C=FR/ST=Ile-de-France/L=Paris/O=42/OU=42Paris/CN=INCEPTION' && \
+		echo "Certificate created"
 
 # IS THIS NECCESSARY? SEEMS OVERKILL
 # RUN openssl dhparam -out /etc/nginx/dhparam.pem 2048

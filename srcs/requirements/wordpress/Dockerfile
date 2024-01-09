@@ -1,10 +1,9 @@
 FROM debian:bullseye
 
 # Update and upgrade
-RUN apt-get update && apt-get upgrade -y
-
+RUN apt-get update && apt-get upgrade -y && \
 # Install wordpress dependencies
-RUN apt-get install -y \
+	 apt-get install -y \
 	php8.3 php8.3-fpm php8.3-mysql php8.3-curl php8.3-gd php8.3-intl php-pear \
 	php-imagick php8.3-imap php8.3-memcache php8.3-pspell php8.3-recode \
 	php8.3-sqlite3 php8.3-tidy php8.3-xmlrpc php8.3-xsl php8.3-mbstring \
@@ -16,15 +15,13 @@ RUN apt-get install -y \
 	php8.3-ssh2 php8.3-yaml php8.3-redis php8.3-memcached php8.3-igbinary \
 	php8.3-ldap php8.3-xmlrpc php8.3-xdebug php8.3-mongodb php8.3-ssh2 \
 	php8.3-yaml php8.3-redis php8.3-memcached php8.3-igbinary php8.3-ldap \
-	php8.3-xmlrpc
-
+	php8.3-xmlrpc && \
 # PHP-fpm must listen to port 9000
 # sed edits the file in place (-i) and replaces the string with 9000
 # The old configuration (listen = 127.0.0.1:9000) would only listen in localhost
-RUN sed -i 's/listen = 127.0.0.1:9000/listen = 9000/g' /etc/php/8.3/fpm/pool.d/www.conf
-
+	 sed -i 's/listen = 127.0.0.1:9000/listen = 9000/g' /etc/php/8.3/fpm/pool.d/www.conf && \
 #Install wordpress cli
-RUN apt-get install -y wget && \
+	 apt-get install -y wget && \
 	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar &&\
 	chmod +x wp-cli.phar && \
 	mv wp-cli.phar /usr/bin/wp-cli.phar
