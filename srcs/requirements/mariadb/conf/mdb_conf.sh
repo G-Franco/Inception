@@ -47,13 +47,13 @@ else
 	# Remove root accounts that are not localhost
 	echo "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');" >> ${TMP}
 	# Change root password to provided one
-	echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASS}';" >> ${TMP}
+	echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MDB_ROOT_PASSWORD}';" >> ${TMP}
 	# Create database with specified name
-	echo "CREATE DATABASE ${WP_DB_NAME};" >> ${TMP}
+	echo "CREATE DATABASE ${MDB_NAME};" >> ${TMP}
 	# Create user with specified name and password
-	echo "CREATE USER '${WP_DB_USER}'@'%' IDENTIFIED BY '${WP_DB_PASS}';" >> ${TMP}
+	echo "CREATE USER '${WP_USER_EMAIL}'@'%' IDENTIFIED BY '${WP_ADMIN_PASSWORD}';" >> ${TMP}
 	# Grant all privileges on database to user
-	echo "GRANT ALL PRIVILEGES ON ${WP_DB_NAME}.* TO '${WP_DB_USER}'@'%' IDENTIFIED BY '${WP_DB_PASS}';" >> ${TMP}
+	echo "GRANT ALL PRIVILEGES ON ${MDB_NAME}.* TO '${WP_USER_EMAIL}'@'%' IDENTIFIED BY '${WP_ADMIN_PASSWORD}';" >> ${TMP}
 	# Runs at end to ensure that all changes to user priveleges are applied
 	echo "FLUSH PRIVILEGES;" >> ${TMP}
 
