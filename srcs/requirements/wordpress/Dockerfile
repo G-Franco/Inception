@@ -27,10 +27,10 @@ RUN apt-get update && apt-get upgrade -y && \
 	mv wp-cli.phar /usr/bin/wp-cli.phar
 
 # Copy wordpress conf file
-COPY	./conf/wordpress_conf.conf /tmp/wordpress_conf.conf
-RUN		chmod +x /tmp/wordpress_conf.conf
+COPY	./conf/wordpress_conf.sh /tmp/wordpress_conf.sh
+RUN		chmod +x /tmp/wordpress_conf.sh
 
 WORKDIR /var/www/html/wordpress
 
 #Configuration must run when container starts
-ENTRYPOINT ["/tmp/wordpress_conf.conf"]
+ENTRYPOINT ["/tmp/wordpress_conf.sh"]
