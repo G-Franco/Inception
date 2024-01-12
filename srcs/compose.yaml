@@ -7,16 +7,23 @@ services:
         container_name: nginx
         # Image to use. Will be made from a dockerfile specified in build
         build:          ./requirements/nginx/
+        # Name of image created with build
+        image:          nginx
         networks:       inception
         ports:          "443:443"
         volumes:
             - wordpress_data:/home/gacorrei/data/wordpress
+            # Mounts the ssl certificates from the host to the container.
+            # :ro -> read only
+            - $(NGINX_SSL_KEY_PATH):/etc/ssl/private/nginx-selfsigned.key:ro
+            - $(NGINX_SSL_CERT_PATH):/etc/ssl/certs/nginx-selfsigned.crt:ro
         env_file:       .env
         depends_on:     wordpress
         restart:        on_failure
     wordpress:
         container_name: wordpress
         build:          ./requirements/wordpress/
+        image:          wordpress
         networks:       inception
         volumes:
             - wordpress_data:/home/gacorrei/data/wordpress
@@ -26,6 +33,7 @@ services:
     mariadb:
         container_name: mariadb
         build:          ./requirements/mariadb/
+        image:          mariadb
         networks:       inception
         volumes:
             - mariadb_data:home/gacorrei/data/mariadb

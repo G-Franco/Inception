@@ -9,16 +9,16 @@ up: setup
 # -f: Specify a compose file
 # -d: Detached mode: Run containers in the background
 # --build: Build images before starting containers.
-	${ENV} docker-compose -f ./srcs/docker-compose.yml up -d --build
+	${ENV} docker-compose -f ./srcs/compose.yaml up -d --build
 
 down:
-	${ENV} docker-compose -f ./srcs/docker-compose.yml down
+	${ENV} docker-compose -f ./srcs/compose.yaml down
 
 start:
-	${ENV} docker-compose -f ./srcs/docker-compose.yml start
+	${ENV} docker-compose -f ./srcs/compose.yaml start
 
 stop:
-	${ENV} docker-compose -f ./srcs/docker-compose.yml stop
+	${ENV} docker-compose -f ./srcs/compose.yaml stop
 
 status:
 # ps: List containers
