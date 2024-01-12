@@ -12,7 +12,7 @@ services:
         networks:       inception
         ports:          "443:443"
         volumes:
-            - wordpress_data:/home/gacorrei/data/wordpress
+            - wordpress_data:./data/wordpress
             # Mounts the ssl certificates from the host to the container.
             # :ro -> read only
             - $(NGINX_SSL_KEY_PATH):/etc/ssl/private/nginx-selfsigned.key:ro
@@ -26,7 +26,7 @@ services:
         image:          wordpress
         networks:       inception
         volumes:
-            - wordpress_data:/home/gacorrei/data/wordpress
+            - wordpress_data:./data/wordpress
         env_file:       .env
         depends_on:     mariadb
         restart:        on_failure
@@ -61,10 +61,10 @@ volumes:
             # Binds the volume to a directory on the host.
             # Changes in the container are visible on the host and vice versa.
             o: bind
-            device: /home/gacorrei/data/wordpress
+            device: ./data/wordpress
     mariadb_data:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: home/gacorrei/data/mariadb
+            device: ./data/mariadb
