@@ -9,34 +9,40 @@ services:
         build:          ./requirements/nginx/
         # Name of image created with build
         image:          nginx
-        networks:       inception
-        ports:          "443:443"
+        networks:
+            - inception
+        ports:
+            - "443:443"
         volumes:
-            - wordpress_data:./data/wordpress
+            - wordpress_data:/home/gacorrei/data/wordpress
             # Mounts the ssl certificates from the host to the container.
             # :ro -> read only
-            - $(NGINX_SSL_KEY_PATH):/etc/ssl/private/nginx-selfsigned.key:ro
-            - $(NGINX_SSL_CERT_PATH):/etc/ssl/certs/nginx-selfsigned.crt:ro
+            - /etc/ssl/private/nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key:ro
+            - /etc/ssl/certs/nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt:ro
         env_file:       .env
-        depends_on:     wordpress
+        depends_on:
+            - wordpress
         restart:        on_failure
     wordpress:
         container_name: wordpress
         build:          ./requirements/wordpress/
         image:          wordpress
-        networks:       inception
+        networks:
+            - inception
         volumes:
-            - wordpress_data:./data/wordpress
+            - wordpress_data:/home/gacorrei/data/wordpress
         env_file:       .env
-        depends_on:     mariadb
+        depends_on:
+            - mariadb
         restart:        on_failure
     mariadb:
         container_name: mariadb
         build:          ./requirements/mariadb/
         image:          mariadb
-        networks:       inception
+        networks:
+            - inception
         volumes:
-            - mariadb_data:home/gacorrei/data/mariadb
+            - mariadb_data:/home/gacorrei/data/mariadb
         env_file:       .env
         restart:        on_failure
 networks:
@@ -61,10 +67,10 @@ volumes:
             # Binds the volume to a directory on the host.
             # Changes in the container are visible on the host and vice versa.
             o: bind
-            device: ./data/wordpress
+            device: /home/gacorrei/data/wordpress
     mariadb_data:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: ./data/mariadb
+            device: /home/gacorrei/data/mariadb

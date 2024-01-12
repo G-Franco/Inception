@@ -6,19 +6,19 @@ up:
 # -f: Specify a compose file
 # -d: Detached mode: Run containers in the background
 # --build: Build images before starting containers.
-	docker-compose -f ./srcs/compose.yaml up -d --build
+	docker compose -f ./srcs/compose.yaml up -d --build
 
 down:
-	docker-compose -f ./srcs/compose.yaml down
+	docker compose -f ./srcs/compose.yaml down
 
 start:
-	docker-compose -f ./srcs/compose.yaml start
+	docker compose -f ./srcs/compose.yaml start
 
 stop:
-	docker-compose -f ./srcs/compose.yaml stop
+	docker compose -f ./srcs/compose.yaml stop
 
 clean:
-	docker-compose -f srcs/compose.yaml down
+	docker compose -f srcs/compose.yaml down
 # -q: Only display numeric IDs
 # -a: Show all containers (default shows just running)
 # 2>/dev/null: Redirect errors to /dev/null
