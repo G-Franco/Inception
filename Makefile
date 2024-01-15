@@ -18,22 +18,17 @@ stop:
 	docker compose -f ./srcs/compose.yaml stop
 
 clean:
-	docker compose -f srcs/compose.yaml down
-# -q: Only display numeric IDs
-# -a: Show all containers (default shows just running)
-# 2>/dev/null: Redirect errors to /dev/null
-	docker stop $(docker ps -qa) 2>/dev/null
-	docker rm $(docker ps -qa) 2>/dev/null
-# rmi: Remove one or more images
-# -f: Force removal of the image
-	docker rmi -f $(docker images -qa) 2>/dev/null
-	docker volume rm $(docker volume ls -q) 2>/dev/null
-	docker network rm $(docker network ls -q) 2>/dev/null
+# down: Stop and remove containers, networks, images
+# --volumes: also removes volumes
+# --rmi: Remove images.
+	docker compose -f srcs/compose.yaml down --volumes --rmi all
+
+fclean: clean
 # prune: Remove unused data
 # -a: Remove all unused images not just dangling ones
-	docker system prune -a --volume 2>/dev/null
+# --volumes: Prune volumes
 # --force: Do not prompt for confirmation
-	docker system prune -a --force 2>/dev/null
+	docker system prune -a --volumes --force
 	sudo rm -rf /home/gacorrei/data
 
-PHONY: all up down start stop clean
+PHONY: all up down start stop clean fclean
