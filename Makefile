@@ -1,8 +1,8 @@
 all: up
 
 up:
-	sudo mkdir -p /home/gacorrei/data/mariadb_data
-	sudo mkdir -p /home/gacorrei/data/wordpress_data
+	sudo mkdir -p /home/gacorrei/data/mariadb
+	sudo mkdir -p /home/gacorrei/data/wordpress
 # -f: Specify a compose file
 # -d: Detached mode: Run containers in the background
 # --build: Build images before starting containers.

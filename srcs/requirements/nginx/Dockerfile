@@ -8,7 +8,7 @@ RUN		apt-get update && apt-get upgrade -y && \
 		echo "Update and upgrade done" && \
 #Install NGINX and TLS
 		apt-get install -y nginx openssl && \
-		echo "NGINX and TLS installed" && \
+		echo "NGINX and TLS installed"
 #Copy configuration files
 COPY	./conf/nginx.conf /etc/nginx/nginx.conf
 COPY	./conf/default.conf /etc/nginx/http.d/default.conf

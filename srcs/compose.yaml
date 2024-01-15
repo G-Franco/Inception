@@ -22,7 +22,7 @@ services:
         env_file:       .env
         depends_on:
             - wordpress
-        restart:        on_failure
+        restart:        on-failure
     wordpress:
         container_name: wordpress
         build:          ./requirements/wordpress/
@@ -34,7 +34,7 @@ services:
         env_file:       .env
         depends_on:
             - mariadb
-        restart:        on_failure
+        restart:        on-failure
     mariadb:
         container_name: mariadb
         build:          ./requirements/mariadb/
@@ -44,7 +44,7 @@ services:
         volumes:
             - mariadb_data:/home/gacorrei/data/mariadb
         env_file:       .env
-        restart:        on_failure
+        restart:        on-failure
 networks:
     inception:
         # Setting name to avoid default naming scheme (projectname_networkname)
