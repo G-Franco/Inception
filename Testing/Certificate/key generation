@@ -1,1 +1,1 @@
-openssl req -x509 -newkey rsa:4096 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -days 365 -nodes -subj '/C=PT/ST=Lisbon/L=Lisbon/O=42/OU=42Lisboa/CN=INCEPTION'
+openssl req -x509 -newkey rsa:4096 -keyout ./nginx-selfsigned.key -out ./nginx-selfsigned.crt -days 365 -nodes -subj '/C=PT/ST=Lisbon/L=Lisbon/O=42/OU=42Lisboa/CN=INCEPTION'
