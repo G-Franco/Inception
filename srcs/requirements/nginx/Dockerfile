@@ -12,7 +12,7 @@ RUN		apt-get update && apt-get upgrade -y && \
 #Copy configuration files
 COPY	./conf/nginx.conf /etc/nginx/nginx.conf
 COPY	./conf/default.conf /etc/nginx/http.d/default.conf
-COPY 	index.html /usr/share/nginx/html/index.html
+COPY 	index.html /usr/share/nginx/html
 
 #Set entrypoint
 #Starts NGINX, -g allows arguments to be specified

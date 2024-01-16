@@ -17,8 +17,8 @@ services:
             - wordpress_data:/home/gacorrei/data/wordpress
             # Mounts the ssl certificates from the host to the container.
             # :ro -> read only
-            - /etc/ssl/private/nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key:ro
-            - /etc/ssl/certs/nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt:ro
+            - ./nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key:ro
+            - ./nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt:ro
         env_file:       .env
         depends_on:
             - wordpress
