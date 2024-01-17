@@ -10,8 +10,8 @@ RUN		apt-get update && apt-get upgrade -y && \
 		apt-get install -y nginx openssl && \
 		echo "NGINX and TLS installed"
 #Copy configuration files
+COPY	./conf/default.conf /etc/nginx/default.conf
 COPY	./conf/nginx.conf /etc/nginx/nginx.conf
-COPY	./conf/default.conf /etc/nginx/http.d/default.conf
 COPY 	index.html /usr/share/nginx/html
 
 #Set entrypoint
