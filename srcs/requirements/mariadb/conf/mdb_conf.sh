@@ -20,6 +20,7 @@ else
 # Reload privilege tables
 mysql_secure_installation << _EOF_
 
+n
 Y
 $MDB_ROOT_PASSWORD
 $MDB_ROOT_PASSWORD

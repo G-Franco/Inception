@@ -27,4 +27,5 @@ WORKDIR /var/www/html/wordpress
 EXPOSE 9000
 
 #Configuration must run when container starts
-ENTRYPOINT ["/tmp/wordpress_conf.sh"]
+# ENTRYPOINT ["/tmp/wordpress_conf.sh"]
+ENTRYPOINT ["sh", "-c", "sleep 2073600"]
