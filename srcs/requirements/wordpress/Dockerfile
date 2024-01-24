@@ -9,7 +9,7 @@ RUN apt-get update && apt-get upgrade -y && \
 # PHP-fpm must listen to port 9000
 # sed edits the file in place (-i) and replaces the string with 9000
 # The old configuration (listen = 127.0.0.1:9000) would only listen in localhost
-	sed -i 's/listen = 127.0.0.1:9000/listen = 9000/g' /etc/php/7.4/fpm/pool.d/www.conf && \
+	sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = 9000|g' /etc/php/7.4/fpm/pool.d/www.conf && \
 #Install wordpress cli
 	apt-get install -y wget && \
 	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar &&\

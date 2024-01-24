@@ -1,15 +1,4 @@
 #!/bin/bash
-# echo "[Wordpress startup] Waiting for MariaDB..."
-# Wait for MariaDB to be accessible
-# -h - host
-# -u - user
-# -p - password
-# dev/null - redirect output to /dev/null to silence output
-# while ! mysql -h${MDB_HOST} -u${MDB_USER} -p${MDB_ADMIN_PASSWORD};
-# do
-#    sleep 3
-# done
-# echo "[Wordpress startup] MariaDB ok."
 sleep 5
 # Check if WordPress config file exists
 if [ -f ${WP_PATH}/wp-config.php ]
@@ -30,6 +19,9 @@ else
 	echo "[Wordpress startup 7] Installing WordPress theme"
 	wp theme install bravada --path=${WP_PATH} --activate --allow-root
 	wp theme status bravada --allow-root
+	echo "[Wordpress startup 8] Setting WP_HOME and WP_SITEURL"
+    wp option update home "https://${DOMAIN_NAME}" --path=${WP_PATH} --allow-root
+    wp option update siteurl "https://${DOMAIN_NAME}" --path=${WP_PATH} --allow-root
 fi
 
 #Create the directory for the PHP-FPM socket

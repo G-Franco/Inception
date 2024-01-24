@@ -7,7 +7,7 @@ FROM	debian:bullseye
 RUN		apt-get update && apt-get upgrade -y && \
 		echo "Update and upgrade done" && \
 #Install NGINX and TLS
-		apt-get install -y nginx openssl && \
+		apt-get install -y nginx openssl curl && \
 		echo "NGINX and TLS installed" && \
 		rm -rf /var/lib/apt/lists/*
 #Copy configuration files
