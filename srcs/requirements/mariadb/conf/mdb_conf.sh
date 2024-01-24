@@ -18,6 +18,7 @@ else
 # DON'T disallow root login remotely
 # Remove test database and access to it
 # Reload privilege tables
+sleep 2
 mysql_secure_installation << _EOF_
 
 n
@@ -35,6 +36,6 @@ echo "CREATE DATABASE IF NOT EXISTS $MDB_NAME; GRANT ALL ON $MDB_NAME.* TO '$MDB
 
 fi
 
-/etc/init.d/mysql stop
+mysqladmin shutdown
 
 exec "$@"

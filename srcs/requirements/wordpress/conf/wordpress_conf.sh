@@ -1,30 +1,16 @@
-echo "[Wordpress startup] Waiting for MariaDB..."
+#!/bin/bash
+# echo "[Wordpress startup] Waiting for MariaDB..."
 # Wait for MariaDB to be accessible
 # -h - host
 # -u - user
 # -p - password
 # dev/null - redirect output to /dev/null to silence output
-#while ! mysql -h${MDB_HOST} -u${MDB_USER} -p${MDB_ADMIN_PASSWORD} ${MDB_NAME} &>/dev/null;
-#do
+# while ! mysql -h${MDB_HOST} -u${MDB_USER} -p${MDB_ADMIN_PASSWORD};
+# do
 #    sleep 3
-#done
-#echo "[Wordpress startup] MariaDB ok."
-# export WP_TITLE="Inception_Eval"
-# export WP_ADMIN_USER="big_boss"
-# export WP_ADMIN_EMAIL="cant_excel@gmail.com"
-# export WP_ADMIN_PASSWORD="Unhackable2"
-# export WP_USER_EMAIL="generic_tester@gmail.com"
-# export WP_USER_PASSWORD="1234"
-# export WP_PATH="/var/www/html/wordpress"
-
-# # MariaDB
-# export MDB_NAME="wordpress_db"
-# # 3306 is the default port, added to be explicit
-# export MDB_HOST="mariadb:3306"
-# export MDB_ROOT_PASSWORD="UnguessableRootPassword"
-# export MDB_USER="generic_tester"
-# export MDB_USER_PASSWORD="super_STRONG_p455w0rd"
-
+# done
+# echo "[Wordpress startup] MariaDB ok."
+sleep 5
 # Check if WordPress config file exists
 if [ -f ${WP_PATH}/wp-config.php ]
 then
@@ -46,5 +32,8 @@ else
 	wp theme status bravada --allow-root
 fi
 
+#Create the directory for the PHP-FPM socket
+mkdir -p /run/php/
+
 echo "[Wordpress startup] Starting WordPress fastCGI on port 9000."
-exec /usr/sbin/php-fpm7.4 -F
+exec /usr/sbin/php-fpm7.4 -F -R

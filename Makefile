@@ -31,4 +31,6 @@ fclean: clean
 	docker system prune -a --volumes --force
 	rm -rf /home/gacorrei/data
 
-PHONY: all up down start stop clean fclean
+re: fclean all
+
+PHONY: all up down start stop clean fclean re
