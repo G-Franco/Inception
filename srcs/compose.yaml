@@ -14,7 +14,7 @@ services:
         ports:
             - "443:443"
         volumes:
-            - wordpress_data:/home/gacorrei/data/wordpress
+            - wordpress_data:/var/www/html
             # Mounts the ssl certificates from the host to the container.
             # :ro -> read only
             - ./nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key:ro
@@ -30,7 +30,7 @@ services:
         networks:
             - inception
         volumes:
-            - wordpress_data:/home/gacorrei/data/wordpress
+            - wordpress_data:/var/www/html
         env_file:       .env
         depends_on:
             - mariadb
@@ -42,7 +42,7 @@ services:
         networks:
             - inception
         volumes:
-            - mariadb_data:/home/gacorrei/data/mariadb
+            - mariadb_data:/var/lib/mysql
         env_file:       .env
         restart:        on-failure
 networks:

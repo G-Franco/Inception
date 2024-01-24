@@ -1,8 +1,6 @@
 all: up
 
 up:
-	mkdir -p /home/gacorrei/data/mariadb
-	mkdir -p /home/gacorrei/data/wordpress
 # -f: Specify a compose file
 # -d: Detached mode: Run containers in the background
 # --build: Build images before starting containers.
@@ -29,7 +27,6 @@ fclean: clean
 # --volumes: Prune volumes
 # --force: Do not prompt for confirmation
 	docker system prune -a --volumes --force
-	rm -rf /home/gacorrei/data
 
 re: fclean all
 
