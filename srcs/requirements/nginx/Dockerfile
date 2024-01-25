@@ -11,9 +11,9 @@ RUN		apt-get update && apt-get upgrade -y && \
 		echo "NGINX and TLS installed" && \
 		rm -rf /var/lib/apt/lists/*
 #Copy configuration files
-COPY	./conf/default.conf /etc/nginx/default.conf
-COPY	./conf/nginx.conf /etc/nginx/nginx.conf
-COPY 	index.html /usr/share/nginx/html
+COPY	./conf/default.conf /etc/nginx/conf.d/default.conf
+# COPY	./conf/nginx.conf /etc/nginx/nginx.conf
+# COPY 	index.html /usr/share/nginx/html
 
 #Set entrypoint
 #Starts NGINX, -g allows arguments to be specified
