@@ -17,8 +17,8 @@ RUN chmod +x /usr/local/bin/mdb_conf.sh
 EXPOSE 3306
 
 # Run configuration script
-ENTRYPOINT ["sh", "/usr/local/bin/mdb_conf.sh"]
-# ENTRYPOINT ["sh", "-c", "sleep 2073600"]
+# ENTRYPOINT ["sh", "/usr/local/bin/mdb_conf.sh"]
+ENTRYPOINT ["sh", "-c", "sleep 2073600"]
 
 # Run mysql server and listen globally
-CMD ["mysqld", "--bind-address=0.0.0.0"]
+# CMD ["mysqld", "--bind-address=0.0.0.0"]
