@@ -17,7 +17,6 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 		return 1
 	fi
 
-	# https://stackoverflow.com/questions/10299148/mysql-error-1045-28000-access-denied-for-user-billlocalhost-using-passw
  	# Write SQL commands to temporary file
 	cat << EOF > $tfile
 USE mysql;
