@@ -24,7 +24,7 @@ RUN		chmod +x /tmp/wordpress_conf.sh
 
 COPY conf/index.html /tmp/index.html
 
-WORKDIR /var/www/html/wordpress
+WORKDIR /var/www/html
 
 EXPOSE 9000
 
