@@ -1,5 +1,4 @@
 #!/bin/bash
-sleep 5
 # Check if WordPress config file exists
 if [ -f ./wp-config.php ]
 then

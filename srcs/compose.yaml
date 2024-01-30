@@ -33,7 +33,8 @@ services:
             - wordpress_data:/var/www/html
         env_file:       .env
         depends_on:
-            - mariadb
+            mariadb:
+                condition: service_healthy
         restart:        on-failure
     mariadb:
         container_name: mariadb
@@ -45,6 +46,12 @@ services:
             - mariadb_data:/var/lib/mysql
         env_file:       .env
         restart:        on-failure
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "--silent"]
+            interval: 5s
+            timeout: 30s
+            retries: 10
+            start_period: 5s
 networks:
     inception:
         # Setting name to avoid default naming scheme (projectname_networkname)
