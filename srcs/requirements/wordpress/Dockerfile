@@ -22,8 +22,6 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY	./conf/wordpress_conf.sh /tmp/wordpress_conf.sh
 RUN		chmod +x /tmp/wordpress_conf.sh
 
-COPY conf/index.html /tmp/index.html
-
 WORKDIR /var/www/html
 
 EXPOSE 9000

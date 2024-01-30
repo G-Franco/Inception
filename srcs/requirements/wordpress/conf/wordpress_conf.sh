@@ -4,7 +4,6 @@ if [ -f ./wp-config.php ]
 then
 	echo "[Wordpress startup 0] WordPress config file already present."
 else
-	mv /tmp/index.html /var/www/html/index.html
 	echo "[Wordpress startup 1] Setting up WordPress"
 	echo "[Wordpress startup 2] Updating WP-CLI tool"
 	wp cli update --yes --allow-root
