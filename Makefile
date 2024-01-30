@@ -27,6 +27,8 @@ fclean: clean
 # --volumes: Prune volumes
 # --force: Do not prompt for confirmation
 	docker system prune -a --volumes --force
+	rm -rf ~/data/mariadb/*
+	rm -rf ~/data/wordpress/*
 
 re: fclean all
 
