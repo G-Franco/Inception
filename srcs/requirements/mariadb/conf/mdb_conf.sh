@@ -30,13 +30,12 @@ GRANT ALL PRIVILEGES ON $MDB_NAME.* TO '$MDB_USER'@'%';
 
 FLUSH PRIVILEGES;
 EOF
-
+	# Initialize mariadb in bootstrap mode (with initial data)
 	/usr/sbin/mysqld --user=mysql --bootstrap < $tfile
 	rm -f $tfile
 fi
 
 # Allow remote connections to the database
-# sed -i "s|skip-networking|# skip-networking|g" /etc/my.cnf.d/mariadb-server.cnf
 sed -i "s|.*bind-address\s*=.*|bind-address=0.0.0.0|g" /etc/mysql/mariadb.conf.d/50-server.cnf
 
 # Finally, it starts the MariaDB server in console mode, using the 'mysql' user.

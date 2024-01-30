@@ -5,7 +5,6 @@ FROM debian:bullseye
 RUN apt-get update && apt-get upgrade -y && \
 	echo "Update and upgrade done" && \
 # Installation
-# No need to specify server, it's included in mariadb
 # Client is installed to have access to mysql command line
 	 apt-get install -y mariadb-server mariadb-client && \
 	 rm -rf /var/lib/apt/lists/*
@@ -18,4 +17,3 @@ EXPOSE 3306
 
 # Run configuration script
 ENTRYPOINT ["sh", "/usr/local/bin/mdb_conf.sh"]
-# ENTRYPOINT ["sh", "-c", "sleep 2073600"]
