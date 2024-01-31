@@ -27,9 +27,26 @@ fclean: clean
 # --volumes: Prune volumes
 # --force: Do not prompt for confirmation
 	docker system prune -a --volumes --force
+	docker network ls -q -f "driver=custom" | xargs -r docker network rm 2>/dev/null
 	sudo rm -rf ~/data/mariadb/*
 	sudo rm -rf ~/data/wordpress/*
 
 re: fclean all
 
-PHONY: all up down start stop clean fclean re
+info:
+	@echo "Containers:"
+	docker ps -a
+	@echo "-------------------------------------------------------------------"
+	@echo "Images:"
+	docker images -a
+	@echo "-------------------------------------------------------------------"
+	@echo "Volumes:"
+	docker volume ls
+	@echo "-------------------------------------------------------------------"
+	@echo "Networks:"
+	docker network ls
+
+connect:
+	docker exec -it mariadb mysql -u root -p
+
+PHONY: all up down start stop clean fclean re info connect

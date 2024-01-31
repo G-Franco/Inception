@@ -16,4 +16,4 @@ RUN chmod +x /usr/local/bin/mdb_conf.sh
 EXPOSE 3306
 
 # Run configuration script
-ENTRYPOINT ["sh", "/usr/local/bin/mdb_conf.sh"]
+ENTRYPOINT ["/usr/local/bin/mdb_conf.sh"]

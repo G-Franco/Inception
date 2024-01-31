@@ -1,4 +1,4 @@
-FROM	debian:bullseye
+FROM debian:bullseye
 
 # Update and upgrade the system
 # -y to auto accept prompts, otherwise it will wait for user input

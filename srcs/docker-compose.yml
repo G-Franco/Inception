@@ -50,7 +50,7 @@ services:
             test: ["CMD", "mysqladmin", "ping", "--silent"]
             interval: 5s
             timeout: 30s
-            retries: 10
+            retries: 5
             start_period: 5s
 networks:
     inception:
