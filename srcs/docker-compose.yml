@@ -17,9 +17,9 @@ services:
             - wordpress_data:/var/www/html
             # Mounts the ssl certificates from the host to the container.
             # :ro -> read only
-            - ./nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key:ro
-            - ./nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt:ro
-        env_file:       .env
+            - /home/gacorrei/data/nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key:ro
+            - /home/gacorrei/data/nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt:ro
+        env_file:       /home/gacorrei/data/.env
         depends_on:
             - wordpress
         restart:        on-failure
@@ -31,7 +31,7 @@ services:
             - inception
         volumes:
             - wordpress_data:/var/www/html
-        env_file:       .env
+        env_file:       /home/gacorrei/data/.env
         depends_on:
             mariadb:
                 condition: service_healthy
@@ -44,7 +44,7 @@ services:
             - inception
         volumes:
             - mariadb_data:/var/lib/mysql
-        env_file:       .env
+        env_file:       /home/gacorrei/data/.env
         restart:        on-failure
         healthcheck:
             test: ["CMD", "mysqladmin", "ping", "--silent"]
